@@ -9,7 +9,8 @@ const AuthorSchema = new Schema({
   date_of_death: { type: Date },
 });
 
-AuthorSchema.virtual("name").get(() => {
+AuthorSchema.virtual("name").get(function () {
+  // dont use arrow function because this obj is needed
   let fullname = "";
   if (this.first_name && this.family_name) {
     fullname = `${this.family_name}, ${this.first_name}`;
@@ -21,5 +22,23 @@ AuthorSchema.virtual("url").get(function () {
   // dont use arrow function because this obj is needed
   return `/catalog/author/${this._id}`;
 });
+
+AuthorSchema.virtual("dates_formatted").get(function () {
+  // dont use arrow function because this obj is needed
+  
+  let birth = this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) : "";
+  let death = this.date_of_death ? DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED) : "";
+  
+  if (this.date_of_birth && this.date_of_death) {
+    return `(${date_of_birth} - ${date_of_death})`;
+  } else if (this.date_of_birth) {
+    return `(born ${date_of_birth})`;
+  } else if (this.date_of_death) {
+    return `(died ${date_of_death})`;
+  } else {
+    return ""
+  }
+});
+
 
 module.exports = mongoose.model("Author", AuthorSchema);

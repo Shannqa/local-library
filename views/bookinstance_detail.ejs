@@ -1,0 +1,48 @@
+ <%- include("./partials/head") %>
+  <body>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <h2>Book copy</h2>
+      <h3>ID: <%= bookinstance._id %></h3>
+      <p>Title: <%= bookinstance.book.title %></p>
+      <p>Imprint: <%= bookinstance.imprint %></p>
+      
+      <p>Author: <a href="<%= book.author.url %>"><%= book.author.name %></a></p>
+      <p>Summary: <%= book.summary %></p>
+      <p>ISBN: <%= book.isbn %></p>
+      <p>Genre:
+      <% if (book.genre) { %>
+       <% book.genre.forEach((genre, index) => { %>
+        <a href="<%= genre.url %>"><%= genre.name %></a>
+        <% if (index !== book.genre.length - 1) { %>
+        <span>, </span>
+       <% }})} %>
+      </p>
+      <h3>Copies</h3>
+      <% if (book_instances.length) { %>
+        <div>
+          <% book_instances.forEach(book => { %>
+            <ul>
+              <li>
+                <%= book.status %>
+              </li> 
+              <li><%= book.imprint %></li>
+              <% if (book.due_back) { %>
+              <li>Due back: <%= book.due_back_formatted %></li>
+              <% } %>
+              <li><%= book.id %></li>
+            </ul>
+
+          <% }) %>
+          
+        </div>
+
+
+        </ul>
+      <% } else { %>
+        <p>There are no copies of this book.</p>
+      <% } %>
+    </div>
+  </body>
+</html>

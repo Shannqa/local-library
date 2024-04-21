@@ -1,0 +1,19 @@
+<%- include("./partials/head") %>
+  <body>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <h2><%= title %></h2>
+      <% if (author_list.length) { %>
+        <ul>
+          <% author_list.forEach(author => { %>
+            <li><a href="<%= author.url %>"><%= author.name %></a>| <%= author.date_of_birth %> - <%= author.date_of_death %></li>
+          <% }) %>
+
+        </ul>
+      <% } else { %>
+        <p>There are no authors.</p>
+      <% } %>
+    </div>
+  </body>
+</html>

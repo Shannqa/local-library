@@ -6,14 +6,15 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const wikiRouter = require("./routes/wiki.js");
+const catalogRouter = require("./routes/catalog");
 
 const app = express();
 
 // mongoose setup
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "";
+const mongoDB =
+  "mongodb+srv://shannqa:LdIvpkewfoBbW7Qw@cluster0.wg6xdnw.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0";
 
 main().catch((err) => console.log(err));
 
@@ -35,7 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // routers
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/wiki", wikiRouter);
+app.use("/catalog", catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

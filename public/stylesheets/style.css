@@ -1,8 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: grid;
+  grid-template-areas: "header header"
+                       "sidebar main"
+                       "footer footer";
+  grid-template-columns: 200px 1fr;
 }
 
 a {
   color: #00B7FF;
+}
+
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.main {
+  grid-area: main;
 }

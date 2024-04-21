@@ -1,0 +1,19 @@
+<%- include("./partials/head") %>
+  <body>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <h2><%= title %></h2>
+      <% if (book_list.length) { %>
+        <ul>
+          <% book_list.forEach(book => { %>
+            <li><a href="<%= book.url %>"><%= book.title %> by <%= book.author.name %></a></li>
+          <% }) %>
+
+        </ul>
+      <% } else { %>
+        <p>There are no books.</p>
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+<%- include("./partials/head") %>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <ul>
+        <li>Books: <%= book_count %></li>
+        <li>Copies: <%= book_instance_count %></li>
+        <li>Available copies: <%= book_instance_available_count %></li>
+        <li>Authors: <%= author_count %></li>
+        <li>Genres: <%= genre_count %></li>
+      </ul>
+    </div>
   </body>
 </html>

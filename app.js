@@ -6,21 +6,36 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const wikiRouter = require("./routes/wiki.js");
 
 const app = express();
+
+// mongoose setup
+const mongoose = require("mongoose");
+mongoose.set("strictQuery", false);
+const mongoDB = "";
+
+main().catch((err) => console.log(err));
+
+async function main() {
+  await mongoose.connect(mongoDB);
+}
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// middleware
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// routers
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/wiki", wikiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

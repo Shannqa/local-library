@@ -1,0 +1,32 @@
+<%- include("./partials/head") %>
+  <body>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <h2><%= title %></h2>
+      <form method="POST">
+        <label for="first_name">First name:
+          <input name="first_name" type="text" required value="<%= author ? author.first_name : null %>">
+        </label>
+        <label for="family_name">First name:
+          <input name="family_name" type="text" required value="<%= author ? author.family_name : null %>">
+        </label>
+        <label for="date_of_birth">Date of birth (optional):
+          <input name="date_of_birth" type="date" placeholder="mm/dd/yyyy" value="<%= author ? author.date_of_birth : null %>">
+        </label>
+        <label for="date_of_death">Date of death (optional):
+          <input name="date_of_death" type="date" placeholder="mm/dd/yyyy" value="<%= author ? author.date_of_death : null %>">
+        </label>
+        
+        <input type="submit" value="Submit">
+      </form>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </body>
+</html>

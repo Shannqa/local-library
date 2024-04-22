@@ -1,0 +1,50 @@
+<%- include("./partials/head") %>
+  <body>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <h2><%= title %></h2>
+      <form method="POST">
+        <label for="book">Book:
+          <select id="book" name="book" required>
+            <option value="">Please select a book</option>
+            <% book_list.forEach(book => { %>
+              <% if (selected_book === book._id.toString()) { %>
+                <option value="<%= book._id %>" selected><%= book.title %></option>
+                <% } else { %>
+                  <option value="<%= book._id %>"><%= book.title %></option>
+              <% } %>
+            <% }) %>
+          </select>
+        </label>
+        <label for="imprint">Imprint:
+          <input id="imprint" name="imprint" type="text" placeholder="Publisher and date info" required value="<%= bookinstance ? bookinstance.imprint : null %>">
+        </label>
+        <label for="due_back">Date when book available:
+          <input id="due_back" name="due_back" type="date" placeholder="yyyy/mm/dd" required value="<%= bookinstance ? bookinstance.due_back : null %>">
+        </label>
+        <label for="status">Status:
+          <select id="status" name="status" required>
+            <option value="">Please select status</option>
+            <% ["Available", "Maintenance", "Loaned", "Reserved"].forEach(stat => { %>
+              <% if (bookinstance && bookinstance.status === stat) { %>
+                <option value="<%= stat %>" selected><%= stat %></option>
+                <% } else { %>
+                  <option value="<%= stat %>"><%= stat %></option>
+              <% } %>
+            <% }) %>
+          </select>
+        </label>
+
+        <input type="submit" value="Submit">
+      </form>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </body>
+</html>

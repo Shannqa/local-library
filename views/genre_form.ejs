@@ -1,0 +1,21 @@
+<%- include("./partials/head") %>
+  <body>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <h2>Create Genre</h2>
+      <form method="POST">
+        <label for="name">Genre:</label>
+        <input name="name" type="text" placeholder="Fantasy, Poetry, etc." required value="<%= genre ? genre.name : null %>">
+        <input type="submit" value="Submit">
+      </form>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const PASS = require("./secret");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -13,7 +14,7 @@ const app = express();
 // mongoose setup
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "";
+const mongoDB = `mongodb+srv://shannqa:${PASS}@cluster0.wg6xdnw.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0`;
 
 main().catch((err) => console.log(err));
 

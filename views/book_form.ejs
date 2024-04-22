@@ -1,0 +1,56 @@
+<%- include("./partials/head") %>
+  <body>
+    <%- include("./partials/header") %>
+    <%- include("./partials/sidebar") %>
+    <div class="main">
+      <h2><%= title %></h2>
+      <form method="POST">
+        <label for="title">Title:
+          <input id="title" name="title" type="text" required value="<%= book ? book.title : null %>">
+        </label>
+        <label for="author">Author:
+          <select id="author" name="author" type="select" required value="<%= book ? book.title : null %>">
+            <option value="">Please select an author</option>
+            <% authors.forEach(author => { %>
+              <% if (book) { %>
+                <% if (author._id.toString() === book.author._id.toString()) { %>
+                  <option value="<%= author._id %>" selected><%= author.name %></option>
+                <% } else { %>
+                  <option value="<%= author._id %>"><%= author.name %></option>
+                <% } %>
+              <% } else { %>
+                <option value="<%= author._id %>"><%= author.name %></option>
+              <% } %>
+            <% }) %>
+          </select>
+        </label>
+        <label for="summary">Summary:
+          <textarea id="summary" name="summary" type="text" required value="<%= book ? book.summary : null %>"></textarea>
+        </label>
+        <label for="isbn">ISBN:
+          <input id="isbn" name="isbn" type="text" required value="<%= book ? book.isbn : null %>">
+        </label>
+        <label for="genre">Genre:
+          <% genres.forEach(genre => { %>
+            <%  if (genre.checked) { %>
+              <input name="genre" type="checkbox" value="<%= genre._id%>" id="<%= genre._id%>">
+              <input name="genre" type="checkbox" checked value="<%= genre._id%>" id="<%= genre._id%>">
+            <% } else { %>
+              <input name="genre" type="checkbox" value="<%= genre._id%>" id="<%= genre._id%>">
+              <label for="<%= genre._id%>"><%= genre.name%></label>
+            <% } %>
+          <% }) %>
+        </label>
+
+        <input type="submit" value="Submit">
+      </form>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -6,14 +6,11 @@
       <h2>Author: <%= author.name %></h2>
       <p><%= author.dates_formatted %></p>
       <h3>Books</h3>
-      <% if (author.books.length) { %>
-        
-          <% author.books.forEach(book => { %>
-            <h4><a href="<%= book.url %>"><%= book.title %></h4>
+      <% if (author_books.length) { %>
+          <% author_books.forEach(book => { %>
+            <h4><a href="<%= book.url %>"><%= book.title %></a></h4>
             <p><%= book.summary %></p>
           <% }) %>
-
-        </ul>
       <% } else { %>
         <p>This author has no books.</p>
       <% } %>

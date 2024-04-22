@@ -8,7 +8,7 @@
       <% if (genre_books.length) { %>
         
           <% genre_books.forEach(book => { %>
-            <h4><a href="<%= book.url %>"><%= book.title %></h4>
+            <h4><a href="<%= book.url %>"><%= book.title %></a></h4>
             <p><%= book.summary %></p>
           <% }) %>
 

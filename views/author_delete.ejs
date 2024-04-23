@@ -5,16 +5,21 @@
     <div class="main">
       <h2>Author: <%= author.name %></h2>
       <p><%= author.dates_formatted %></p>
+      
       <h3>Books</h3>
       <% if (author_books.length) { %>
+        <p>Delete the following books before attempting to delete this author.</p>
           <% author_books.forEach(book => { %>
             <h4><a href="<%= book.url %>"><%= book.title %></a></h4>
             <p><%= book.summary %></p>
           <% }) %>
       <% } else { %>
-        <p>This author has no books.</p>
+        <p>Do you really want to delete this author?</p>
+        <form method="POST">
+          <input type="hidden" name="authorid" value="<%= author._id %>"
+          <input type="submit" value="Delete">
+        </form>
       <% } %>
-      <a href="<%= author.url %>/delete">Delete author</a>
     </div>
   </body>
 </html>

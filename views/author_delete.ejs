@@ -14,9 +14,10 @@
             <p><%= book.summary %></p>
           <% }) %>
       <% } else { %>
+        <p>This author has no books.</p>
         <p>Do you really want to delete this author?</p>
         <form method="POST">
-          <input type="hidden" name="authorid" value="<%= author._id %>"
+          <input type="hidden" name="authorid" value="<%= author._id %>">
           <input type="submit" value="Delete">
         </form>
       <% } %>

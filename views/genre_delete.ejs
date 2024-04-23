@@ -6,6 +6,7 @@
       <h2>Genre: <%= genre.name %></h2>
       <h3>Books</h3>
       <% if (genre_books.length) { %>
+        <p>Delete the following books before attempting to delete this genre.</p>
           <% genre_books.forEach(book => { %>
             <h4><a href="<%= book.url %>"><%= book.title %></a></h4>
             <p><%= book.summary %></p>
@@ -14,8 +15,13 @@
         </ul>
       <% } else { %>
         <p>There are no books in this genre.</p>
+
+        <p>Do you really want to delete this genre?</p>
+        <form method="POST">
+          <input type="hidden" name="genreid" value="<%= genre._id %>">
+          <input type="submit" value="Delete">
+        </form>
       <% } %>
-      <a href="<%= genre.url %>/delete">Delete genre</a>
     </div>
   </body>
 </html>

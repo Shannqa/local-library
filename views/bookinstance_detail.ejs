@@ -11,6 +11,9 @@
       <% if (bookinstance.due_back) { %>
         <p>Due: <%= bookinstance.due_back_formatted %></p>
       <% } %>
+
+      <a href="<%= bookinstance.url %>/delete">Delete book copy</a>
     </div>
+
   </body>
 </html>

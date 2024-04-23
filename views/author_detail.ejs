@@ -5,6 +5,7 @@
     <div class="main">
       <h2>Author: <%= author.name %></h2>
       <p><%= author.dates_formatted %></p>
+      
       <h3>Books</h3>
       <% if (author_books.length) { %>
           <% author_books.forEach(book => { %>

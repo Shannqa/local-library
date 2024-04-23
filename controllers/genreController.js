@@ -119,10 +119,63 @@ exports.genre_delete_post = asyncHandler(async (req, res, next) => {
 
 // show genre update form on get
 exports.genre_update_get = asyncHandler(async (req, res, next) => {
-  res.send("get");
+  const genre = await Genre.findById(req.params.id).exec();
+
+  if (genre === null) {
+    const err = new Error("Genre not found.");
+    err.status = 404;
+    return next(err);
+  }
+
+  res.render("genre_form", {
+    title: "Update Genre",
+    genre: genre,
+    errors: null,
+  });
 });
 
 // send genre update form on post
-exports.genre_update_post = asyncHandler(async (req, res, next) => {
-  res.send("post");
-});
+exports.genre_update_post = [
+  //validate and sanitize the field
+  body("name", "Genre name must contain at least 3 characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+
+  // process request
+  asyncHandler(async (req, res, next) => {
+    // extract validation errors
+    const errors = validationResult(req);
+
+    const genre = new Genre({
+      name: req.body.name,
+      _id: req.params.id,
+    });
+    if (!errors.isEmpty()) {
+      // there are errors, render the form again
+      res.render("genre_form", {
+        title: "Update Genre",
+        genre: genre,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      const genreExists = await Genre.findOne({
+        name: req.body.name,
+      })
+        .collation({ locale: "en", strength: 2 })
+        .exec();
+      if (genreExists) {
+        // genre with this name already exists
+        res.redirect(genreExists.url);
+      } else {
+        const updatedGenre = await Genre.findByIdAndUpdate(
+          req.params.id,
+          genre,
+          {}
+        );
+        res.redirect(updatedGenre.url);
+      }
+    }
+  }),
+];

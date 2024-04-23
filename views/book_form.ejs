@@ -25,7 +25,7 @@
           </select>
         </label>
         <label for="summary">Summary:
-          <textarea id="summary" name="summary" type="text" required value="<%= book ? book.summary : null %>"></textarea>
+          <textarea id="summary" name="summary" type="text" required><%= book ? book.summary : null %></textarea>
         </label>
         <label for="isbn">ISBN:
           <input id="isbn" name="isbn" type="text" required value="<%= book ? book.isbn : null %>">
